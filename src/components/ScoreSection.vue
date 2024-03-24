@@ -67,11 +67,12 @@ axios.post("https://osusachdb.ignacioladal.workers.dev/courseVote/canVote", canV
 })
 
 
-console.log(newscore)
-
 watch(newscore, () => {
-  console.log("Scores updated")
-  // updateScores(newscore)
+  if (newscore.needs_update) {
+    console.log("updated")
+    canVote.value = false
+    updateScores(newscore)
+  }
 })
 
 

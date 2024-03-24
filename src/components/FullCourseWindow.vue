@@ -1,7 +1,7 @@
 <script setup>
 import axios from 'axios';
 import { store } from '../stores/store.js'
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 import CommentSection from './CommentSection.vue';
 import AddCommentWindow from './AddCommentWindow.vue';
 import ScoreSection from './ScoreSection.vue';
@@ -15,13 +15,20 @@ const areCommentsLoaded = ref(false)
 const isCommenting = ref(false)
 const isVoting = ref(false)
 const comments = ref([])
-const randomReference = ref({})
+const randomReference = ref({difficulty_score: 0, time_score: 0, needs_update: false})
 
 
 const updateScoreRef = (n) => {
   console.log("Updating score")
   isVoting.value = false
-  randomReference.value = {elpepe: "test"}
+  randomReference.value.difficulty_score = n.difficulty_score
+  randomReference.value.time_score = n.time_score
+  // Se genera "un tick" de actualización
+  randomReference.value.needs_update = true
+  setTimeout(50, () => {
+    randomReference.value.needs_update = false
+    console.log("desactivado")
+  })
 }
 
 const body = {
