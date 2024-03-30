@@ -57,11 +57,15 @@
       </div>
       <div class="can-vote">
         <div class="vote-row">
-          <p> La dificultad del ramo</p>
+          <div class="row-title">
+            <p> La dificultad del ramo</p>
+          </div>
           <VoteRow @rating="n => diff_rate = n"></VoteRow>
         </div>
         <div class="vote-row">
-          <p>Cuánto tiempo exige el ramo</p>
+          <div class="row-title">
+            <p>Cuánto tiempo exige el ramo</p>
+          </div>
           <VoteRow @rating="n => time_rate = n"></VoteRow>
         </div>
         <button @click="sendVote()"></button>
@@ -69,9 +73,6 @@
     </div>
   </div>
 
-
-
-  
 
 
 </template>
@@ -110,7 +111,7 @@
 
   .can-vote {
     width: 100%;
-    height: 70%;
+    height: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -134,5 +135,9 @@
   button {
     width: 80%;
     height: 33%;
+  }
+
+  .row-title {
+    height: 50%;
   }
 </style>

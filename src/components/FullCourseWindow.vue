@@ -37,12 +37,18 @@ const body = {
 }
 
 
-axios.post("https://osusachdb.ignacioladal.workers.dev/courseComment/getComments", body).then(e => {
-  areCommentsLoaded.value = true
-  comments.value = e.data.payload
-}).catch(e=> {
-  areCommentsLoaded.value = true
-})
+const getComments = () => {
+  areCommentsLoaded.value = false
+  axios.post("https://osusachdb.ignacioladal.workers.dev/courseComment/getComments", body).then(e => {
+    areCommentsLoaded.value = true
+    comments.value = e.data.payload
+  }).catch(e=> {
+    areCommentsLoaded.value = true
+  })
+}
+
+
+getComments()
 
 
 </script>
@@ -51,7 +57,7 @@ axios.post("https://osusachdb.ignacioladal.workers.dev/courseComment/getComments
 
   <div class="full-course">
     <div class="window">
-      <AddCommentWindow v-if="isCommenting" @close-window="isCommenting = false" :course="course"></addCommentWindow>
+      <AddCommentWindow v-if="isCommenting" @close-window="isCommenting = false" :course="course" @comment-submited="getComments()"></addCommentWindow>
       <AddVoteWindow v-if="isVoting" @close-window="isVoting = false" :course="course" @score-submited="n => updateScoreRef(n)"></AddVoteWindow>
       <header>
         <div class="title">
@@ -97,6 +103,9 @@ axios.post("https://osusachdb.ignacioladal.workers.dev/courseComment/getComments
     border-radius: 2%;
     padding: 0% 1%;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
 
@@ -107,6 +116,7 @@ axios.post("https://osusachdb.ignacioladal.workers.dev/courseComment/getComments
     height: 15%;
     margin-top: 0;
     padding: 0% 0%;
+    width: 100%
   }
 
   .title {

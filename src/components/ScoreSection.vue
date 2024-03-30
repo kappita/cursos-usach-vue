@@ -128,6 +128,7 @@ watch(newscore, () => {
     height: 70%;
     display: flex;
     justify-content: center;
+    align-items: center;
   }
   .difficulty-stat {
     background-color: pink;

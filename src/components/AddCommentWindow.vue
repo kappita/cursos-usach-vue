@@ -4,7 +4,7 @@
   import { store } from '../stores/store'
 
   const { course } = defineProps(["course"])
-  defineEmits(['close-window'])
+  const emit = defineEmits(['close-window', 'comment-submited'])
   const comment = ref("")
 
   const body = {
@@ -20,6 +20,8 @@
     body.comment.content = comment.value
     axios.post("https://osusachdb.ignacioladal.workers.dev/courseComment/addComment", body).then(e => {
       console.log(e.data)
+      emit('comment-submited')
+      emit('close-window')
     })
   }
 
