@@ -28,7 +28,7 @@
 <template>
   <component :is="'script'" src="https://accounts.google.com/gsi/client" async></component>
   <div id="g_id_onload"
-  data-client_id="565610849332-4ll2avhqk8h5m9kijp3mhj7j42g2vifi.apps.googleusercontent.com"
+  data-client_id="348322131199-pibdnbbmtllb5e5e361rhi8rhmka2637.apps.googleusercontent.com"
     data-context="signup"
     data-ux_mode="popup"
     data-callback="login"
