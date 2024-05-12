@@ -90,6 +90,9 @@ axios("https://osusachdb.ignacioladal.workers.dev/courses/1").then(e=> updateCou
 }
 
 .courses {
+  padding-left: 12px;
+  padding-right: 12px;
+
   overflow-y: auto;
   height: 85%
 }
@@ -119,9 +122,12 @@ header input {
 
 .courses-container {
   display: grid;
-  margin-top: 40px;
+  justify-items: center;
+  gap: 12px;
 
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 20px;
+
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
   
 }
 
