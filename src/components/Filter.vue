@@ -42,6 +42,10 @@ watch(faculty, e => {
 
 
 <style scoped>
+select {
+  font-size: 15px;
+}
+
 .selectors-parent {
   display: flex;
   gap: 8px;
@@ -56,7 +60,5 @@ watch(faculty, e => {
 .selector option {
   max-width: 100%;
   text-overflow: ellipsis;
-  
-  font-size: 15px;
 }
 </style>
