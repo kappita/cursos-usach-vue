@@ -25,12 +25,12 @@ watch(faculty, e => {
 
 
 <template >
-  <div class="selector">
-    <select class="filtro" v-model="faculty" >
+  <div class="selectors-parent">
+    <select class="selector" v-model="faculty" >
       <option disabled value="">Facultad</option>
       <option v-for="faculty in faculties" :key="faculty.id" :value="faculty.id">{{ faculty.name }}</option>
     </select>
-    <select class="filtro" v-model="career" @change="$emit('select-career', career)">
+    <select class="selector" v-model="career" @change="$emit('select-career', career)">
       <option disabled value="">Carrera</option>
       <option v-for="career in careers" :key="career.id" :value="career.id">{{ career.id }} - {{ career.name }}</option>
     </select>
@@ -42,9 +42,23 @@ watch(faculty, e => {
 
 
 <style scoped>
-
-  .filtro {
-    width: 50%;    
+select {
+  font-size: 15px;
 }
 
+.selectors-parent {
+  display: flex;
+  gap: 8px;
+}
+
+.selector {
+  width: 50%;
+  height: 38px;
+  padding-left: 12px;
+}
+
+.selector option {
+  max-width: 100%;
+  text-overflow: ellipsis;
+}
 </style>
