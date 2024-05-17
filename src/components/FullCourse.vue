@@ -6,7 +6,7 @@ import CommentSection from './CommentSection.vue';
 import AddCommentWindow from './AddCommentWindow.vue';
 import ScoreSection from './ScoreSection.vue';
 import AddVoteWindow from './AddVoteWindow.vue';
-
+import { Icon } from "@iconify/vue";
 
 const emit = defineEmits(["close-course"]);
 
@@ -63,13 +63,13 @@ const onCourseClose = () => {
     <AddCommentWindow v-if="isCommenting" :course="course" @comment-submited="getComments()"></addCommentWindow>
     <AddVoteWindow v-if="isVoting" :course="course" @score-submited="n => updateScoreRef(n)"></AddVoteWindow>
     <header>
-      <div class="title">
-        <h1>{{ course.name }}</h1>
-        <h3>{{ course.id }}</h3>
-      </div>
-      <div class="close-button">
-        <h1 @click="onCourseClose">X</h1>
-      </div>
+      <p class="title">
+        <span>#{{ course.id }}</span>
+        - {{ course.name }}
+      </p>
+      <button @click="onCourseClose">
+        <Icon height="30" icon="ic:round-close" />
+      </button>
     </header>
     <div class="scores">
       <ScoreSection :course="course" :newscore="randomReference" @add-vote="isVoting = true" ></ScoreSection>
@@ -84,20 +84,15 @@ const onCourseClose = () => {
 
 
 <style scoped>
-  .full-course {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background-color: rgb(0,0,0,0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  button {
+    cursor: pointer;
+    border: none;
+    background: none;  
   }
-
   .course-modal {
     width: 70%;
     height: 85%;
-    padding: 5px 20px;
+    padding: 24px;
 
 
     background-color: white;
@@ -112,17 +107,22 @@ const onCourseClose = () => {
 
 
   header {
+    width: 100%;
+    margin-bottom: 25px;
+
     display: flex;
-    align-items: flex-start;
     justify-content: space-between;
-    height: 15%;
-    margin-top: 0;
-    padding: 0% 0%;
-    width: 100%
+
+    color: black;
+    font-size: 1.8rem;
   }
 
   .title {
     height: 100%;
+  }
+
+  .title span {
+    font-weight: 600;
   }
 
   h1 {
@@ -132,10 +132,6 @@ const onCourseClose = () => {
   }
   h3 {
     color: black
-  }
-
-  .close-button h1 {
-    cursor: pointer;
   }
 
   .scores-container {
