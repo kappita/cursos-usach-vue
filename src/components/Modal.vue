@@ -1,17 +1,35 @@
 <script setup>
-import { toRef } from 'vue';
+import { onMounted, onUnmounted, } from 'vue';
 
 const props = defineProps({
   isVisible: Boolean,
 });
 
-const isVisible = toRef(() => props.isVisible);
+const emit = defineEmits(["close-modal"]);
+
+const scapePressedCb = (e) => {
+  if (e.key == "Escape") {
+    emit('close-modal');
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('keydown', scapePressedCb);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', scapePressedCb);
+});
+
+const closeModal = () => {
+  emit('close-modal');
+}
 
 </script>
 
 <template>
   <Teleport to="#modal">
-    <div v-if="isVisible" class="modal">
+    <div v-if="isVisible" class="modal" @click.self="closeModal">
       <slot></slot>
     </div>
   </Teleport>

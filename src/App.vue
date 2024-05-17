@@ -75,7 +75,7 @@ axios("https://osusachdb.ignacioladal.workers.dev/courses/1").then(e=> updateCou
   </div>
   <!-- <FullCourseWindow v-if="isWatchingCourse" :course="currentCourse" @close-window="isWatchingCourse = false">
   </FullCourseWindow> -->
-  <Modal :is-visible="isWatchingCourse">
+  <Modal :is-visible="isWatchingCourse" @close-modal="closeCourse">
     <FullCourse :course="currentCourse" @close-course="closeCourse" />
   </Modal>
 </template>
