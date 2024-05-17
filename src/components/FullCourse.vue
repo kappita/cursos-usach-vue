@@ -1,15 +1,16 @@
 <script setup>
 import axios from 'axios';
 import { store } from '../stores/store.js'
-import { reactive, ref } from 'vue';
+import { reactive, ref, toRef } from 'vue';
 import CommentSection from './CommentSection.vue';
 import AddCommentWindow from './AddCommentWindow.vue';
 import ScoreSection from './ScoreSection.vue';
 import AddVoteWindow from './AddVoteWindow.vue';
 
 
-const { course } = defineProps(["course"])
+const emit = defineEmits(["close-course"]);
 
+const { course } = defineProps(["course"]);
 
 const areCommentsLoaded = ref(false)
 const isCommenting = ref(false)
@@ -48,31 +49,35 @@ const getComments = () => {
 }
 
 getComments()
+
+const onCourseClose = () => {
+  isCommenting.value = false;
+  isVoting.value = false;
+
+  emit("close-course");
+}
 </script>
 
 <template>
-  <div class="full-course">
-    <div class="window">
-      <AddCommentWindow v-if="isCommenting" @close-window="isCommenting = false" :course="course" @comment-submited="getComments()"></addCommentWindow>
-      <AddVoteWindow v-if="isVoting" @close-window="isVoting = false" :course="course" @score-submited="n => updateScoreRef(n)"></AddVoteWindow>
-      <header>
-        <div class="title">
-          <h1>{{ course.name }}</h1>
-          <h3>{{ course.id }}</h3>
-        </div>
-        <div class="close-button">
-          <h1 @click="$emit('close-window')">X</h1>
-        </div>
-      </header>
-      <div class="scores">
-        <ScoreSection :course="course" :newscore="randomReference" @add-vote="isVoting = true" ></ScoreSection>
+  <div class="course-modal">
+    <AddCommentWindow v-if="isCommenting" :course="course" @comment-submited="getComments()"></addCommentWindow>
+    <AddVoteWindow v-if="isVoting" :course="course" @score-submited="n => updateScoreRef(n)"></AddVoteWindow>
+    <header>
+      <div class="title">
+        <h1>{{ course.name }}</h1>
+        <h3>{{ course.id }}</h3>
       </div>
-
-      <div class="comments">
-        <CommentSection :comments="comments" :isLoaded="areCommentsLoaded" @add-comment="isCommenting = true">
-        </CommentSection>
-
+      <div class="close-button">
+        <h1 @click="onCourseClose">X</h1>
       </div>
+    </header>
+    <div class="scores">
+      <ScoreSection :course="course" :newscore="randomReference" @add-vote="isVoting = true" ></ScoreSection>
+    </div>
+
+    <div class="comments">
+      <CommentSection :comments="comments" :isLoaded="areCommentsLoaded" @add-comment="isCommenting = true">
+      </CommentSection>
     </div>
   </div>
 </template>
@@ -89,13 +94,17 @@ getComments()
     justify-content: center;
   }
 
-  .window {
-    width: 50%;
+  .course-modal {
+    width: 70%;
     height: 85%;
+    padding: 5px 20px;
+
+
     background-color: white;
-    border-radius: 2%;
-    padding: 0% 1%;
-    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
