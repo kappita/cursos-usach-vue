@@ -134,12 +134,14 @@ const emit = defineEmits(["add-comment"])
 }
 
 .comment-container {
-  display: grid;
-  height: 85%;
   width: 100%;
+  max-height: 75%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
   overflow-y: auto;
-  grid-template-rows: repeat(1, minmax(0, 1fr));
-  row-gap: 10px;
 }
 
 .no-comments {

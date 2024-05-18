@@ -5,21 +5,14 @@
 </script>
 
 
-
-
 <template>
   <div class="comment">
-    <div class="details">
-      <div class="author">
-        <img :src="comment.user_profile_img" alt="">
-        <p> {{ comment.user_name }}</p>
-      </div>
-      <div class="creation-date">
-        <p>{{ comment.creation_date }}</p>
-      </div>
+    <div class="author">
+      <img :src="comment.user_profile_img" alt="">
+      <p>{{ comment.user_name }}</p>
     </div>
     <div class="content">
-      <p> {{ comment.content }}</p>
+      <p>{{ comment.content }}</p>
     </div>
   </div>
 
@@ -27,45 +20,38 @@
 </template>
 
 <style scoped>
+.comment {
+  display:flex;
+  flex-direction: column;
+  gap: 8px;
 
-  .comment {
-    width: 97%;
-    height: 100%;
-    padding: 1.5%;
-    border-radius: 25px;
-    background-color: antiquewhite;
-  }
+  border-radius: 25px;
+  background-color: antiquewhite;
 
-  .details {
-    display: flex;
-    justify-content: space-between;
-    height: 30%;
-    width: 100%;
-  }
+  padding: 12px;
+  padding-bottom: 16px;
   
-  .author {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    width: 40%;
-  }
-
-  .content {
-    border-radius: 50px;
-    width: 100%;
-    height: 70%;
-  }
-
-
-  p {
-    width: 100%;
-    height: 100%;
-    color: black;
-  }
+  color: black;
+}
   
-  img {
-    height: 100%;
-    border-radius: 100%;
-    margin-right: 3%;
-  }
+.author {
+  display: flex;
+  gap: 10px;
+}
+
+.author p {
+  font-weight: 500;
+}
+.content {
+  border-radius: 50px;
+  min-height: 10px;
+}
+
+
+img {
+  width: 38px;
+  height: 38px;
+  object-fit: cover;
+  border-radius: 100%;
+}
 </style>

@@ -81,8 +81,10 @@ const onCommentFormClose = () => {
     </div>
 
     <div class="comments">
-      <CommentSection :comments="comments" :isLoaded="areCommentsLoaded" @add-comment="isCommenting = true">
-      </CommentSection>
+      <CommentSection :comments="comments" 
+        :isLoaded="areCommentsLoaded" 
+        @add-comment="isCommenting = true"
+      />
     </div>
   </div>
   <Modal :is-visible="isCommenting" @close-modal="onCommentFormClose">
