@@ -3,10 +3,11 @@ import axios from 'axios';
 import { store } from '../stores/store.js'
 import { reactive, ref, toRef } from 'vue';
 import CommentSection from './CommentSection.vue';
-import AddCommentWindow from './AddCommentWindow.vue';
+import AddCommentForm from './AddCommentForm.vue';
 import ScoreSection from './ScoreSection.vue';
 import AddVoteWindow from './AddVoteWindow.vue';
 import { Icon } from "@iconify/vue";
+import Modal from './Modal.vue';
 
 const emit = defineEmits(["close-course"]);
 
@@ -56,11 +57,15 @@ const onCourseClose = () => {
 
   emit("close-course");
 }
+
+const onCommentFormClose = () => {
+  isCommenting.value = false;
+}
+
 </script>
 
 <template>
   <div class="course-modal">
-    <AddCommentWindow v-if="isCommenting" :course="course" @comment-submited="getComments()"></addCommentWindow>
     <AddVoteWindow v-if="isVoting" :course="course" @score-submited="n => updateScoreRef(n)"></AddVoteWindow>
     <header>
       <p class="title">
@@ -80,6 +85,12 @@ const onCourseClose = () => {
       </CommentSection>
     </div>
   </div>
+  <Modal :is-visible="isCommenting" @close-modal="onCommentFormClose">
+    <AddCommentForm :course="course" 
+      @close-comment-form="onCommentFormClose"
+      @comment-submited="getComments" 
+    />
+  </Modal>
 </template>
 
 

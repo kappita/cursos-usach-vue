@@ -131,7 +131,7 @@ header input {
 
   margin-top: 20px;
 
-  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
   
 }
 

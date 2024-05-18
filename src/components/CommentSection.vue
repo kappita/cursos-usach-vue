@@ -23,8 +23,12 @@ const emit = defineEmits(["add-comment"])
 <template>
   <div class="comment-section">
     <div class="comment-title">
-      <p>Comentarios</p>
-      <p v-if="store.isLogged" @click="$emit('add-comment')">+</p>
+      <p class="comment-paragraph">Comentarios</p>
+
+      <button class="comment-add-button" v-if="store.isLogged" @click="$emit('add-comment')">
+        <Icon height="22" icon="ri:chat-new-fill" />
+        <p class="comment-paragraph">Nuevo comentario</p>
+      </button>
     </div>
       
     <div v-if="!store.isLogging && !store.isLogged" class="not-available">
@@ -56,47 +60,55 @@ const emit = defineEmits(["add-comment"])
 </template>
 
 <style scoped>
+
+.comment-add-button {
+  border: 0;
+  background: 0;
+  cursor: pointer;
+}
+.comment-add-button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 .comment-section {
   width: 100%;
 }
 
-p {
-  font-size: 16px;
-  color: black;
-}
+.comment-title > * {
+  width: 100%;
 
-.comment-title p {
   padding: 8px 0px 8px 16px;
   border-bottom: 2px solid black;
   margin-bottom: 16px;
 }
 
-  .is-loading {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.is-loading {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .is-loaded {
-    width: 100%;
-    height: 100%;
-  }
+.is-loaded {
+  width: 100%;
+  height: 100%;
+}
 
-  .comment-section {
-    width: 100%;
-    height: 100%;
-  }
+.comment-section {
+  width: 100%;
+  height: 100%;
+}
 
-  .not-available {
-    width: 100%;
-    height: 100%;
+.not-available {
+  width: 100%;
+  height: 100%;
 
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 
 .not-available-description {
   display: flex;
@@ -110,30 +122,35 @@ p {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 }
 
-  .available {
-    width: 100%;
-    height: 100%;
-  }
+.available {
+  width: 100%;
+  height: 100%;
+}
 
-  .title {
-    display: flex;
-    justify-content: space-between;
-    height: 15%;
-  }
+.title {
+  display: flex;
+  justify-content: space-between;
+  height: 15%;
+}
 
-  .comment-container {
-    display: grid;
-    height: 85%;
-    width: 100%;
-    overflow-y: auto;
-    grid-template-rows: repeat(1, minmax(0, 1fr));
-    row-gap: 10px;
-  }
+.comment-container {
+  display: grid;
+  height: 85%;
+  width: 100%;
+  overflow-y: auto;
+  grid-template-rows: repeat(1, minmax(0, 1fr));
+  row-gap: 10px;
+}
 
-  .no-comments {
-    height: 100%;
-    width: 100%;
-  }
+.no-comments {
+  height: 100%;
+  width: 100%;
+}
 
-
+.comment-paragraph {
+  font-size: 15px;
+  color: black;
+  
+  font-family: Arial, Helvetica, sans-serif;
+}
 </style>
