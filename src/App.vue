@@ -4,6 +4,8 @@ import { store } from './stores/store.js'
 import CourseCard from "./components/CourseCard.vue";
 import Filter from "./components/Filter.vue";
 import FullCourseWindow from "./components/FullCourseWindow.vue";
+import Modal from "./components/Modal.vue";
+import FullCourse from "./components/FullCourse.vue";
 import Profile from "./components/Profile.vue";
 import SignInButton from "./components/SignInButton.vue";
 import LoadingSpinner from "./components/LoadingSpinner.vue";
@@ -17,13 +19,11 @@ const search = ref("")
 const isWatchingCourse = ref(false)
 const currentCourse = ref({ id: null, name: null })
 
-
-
-
 watch(search, () => {
   seenCourses.value = courses.value.filter(e=> e.name.toLowerCase().includes(search.value.toLocaleLowerCase()))
-}
-)
+});
+
+const closeCourse = () => isWatchingCourse.value = false;
 const updateCourses = (newCourses) => {
   courses.value = newCourses;
   seenCourses.value = newCourses.filter(e=> e.name.toLowerCase().includes(search.value.toLocaleLowerCase()))
@@ -55,7 +55,6 @@ axios("https://osusachdb.ignacioladal.workers.dev/courses/1").then(e=> updateCou
 
 
 <template>
-  <FullCourseWindow v-if="isWatchingCourse" :course="currentCourse" @close-window="isWatchingCourse = false"></FullCourseWindow>
   <div class="screen">
     <header>
       <div class="logo">
@@ -72,8 +71,11 @@ axios("https://osusachdb.ignacioladal.workers.dev/courses/1").then(e=> updateCou
       </div>
     </div>
   </div>
-
-  
+  <!-- <FullCourseWindow v-if="isWatchingCourse" :course="currentCourse" @close-window="isWatchingCourse = false">
+  </FullCourseWindow> -->
+  <Modal :is-visible="isWatchingCourse" @close-modal="closeCourse">
+    <FullCourse :course="currentCourse" @close-course="closeCourse" />
+  </Modal>
 </template>
 
 
@@ -127,7 +129,7 @@ header input {
 
   margin-top: 20px;
 
-  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
   
 }
 

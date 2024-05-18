@@ -47,14 +47,10 @@ const getComments = () => {
   })
 }
 
-
 getComments()
-
-
 </script>
 
 <template>
-
   <div class="full-course">
     <div class="window">
       <AddCommentWindow v-if="isCommenting" @close-window="isCommenting = false" :course="course" @comment-submited="getComments()"></addCommentWindow>
@@ -78,10 +74,7 @@ getComments()
 
       </div>
     </div>
-
   </div>
-
-
 </template>
 
 
