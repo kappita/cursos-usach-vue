@@ -5,16 +5,8 @@ import Comment from './Comment.vue';
 import { store } from '../stores/store'
 import { Icon } from "@iconify/vue";
 
-const { comments, isLoaded } = defineProps(["comments", 'isLoaded'])
-const emit = defineEmits(["add-comment"])
-
-
-// watch(loggingInfo, () => {
-//   log.value = loggingInfo
-//   console.log(loggingInfo)
-// })
-
-
+const { comments, isLoaded } = defineProps(["comments", 'isLoaded']);
+const emit = defineEmits(["add-comment"]);
 
 </script>
 
@@ -120,6 +112,8 @@ const emit = defineEmits(["add-comment"])
   
   background-color: #ffffff;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+
+  color: black;
 }
 
 .available {

@@ -1,7 +1,7 @@
 <script setup>
 import axios from 'axios';
 import { store } from '../stores/store.js'
-import { reactive, ref, toRef } from 'vue';
+import { onMounted, reactive, ref, toRef } from 'vue';
 import CommentSection from './CommentSection.vue';
 import AddCommentForm from './AddCommentForm.vue';
 import ScoreSection from './ScoreSection.vue';
@@ -41,19 +41,24 @@ const body = {
 
 const getComments = () => {
   areCommentsLoaded.value = false
-  axios.post("https://osusachdb.ignacioladal.workers.dev/courseComment/getComments", body).then(e => {
-    areCommentsLoaded.value = true
-    comments.value = e.data.payload
-  }).catch(e=> {
-    areCommentsLoaded.value = true
+  axios.post("https://osusachdb.ignacioladal.workers.dev/courseComment/getComments", body)
+    .then(e => {
+      if (!e.data.success) {
+        areCommentsLoaded.value = false;
+      } else {
+        areCommentsLoaded.value = true;
+        comments.value = e.data.payload;
+      }
+  }).catch(e => {
+    console.error(e);
+    areCommentsLoaded.value = false;
   })
 }
 
-getComments()
 
 const onCourseClose = () => {
-  isCommenting.value = false;
-  isVoting.value = false;
+  // isCommenting.value = false;
+  // isVoting.value = false;
 
   emit("close-course");
 }
@@ -61,6 +66,10 @@ const onCourseClose = () => {
 const onCommentFormClose = () => {
   isCommenting.value = false;
 }
+
+onMounted(() => {
+  getComments();
+})
 
 </script>
 

@@ -23,8 +23,8 @@
     body.comment.content = comment.value
     axios.post("https://osusachdb.ignacioladal.workers.dev/courseComment/addComment", body).then(e => {
       console.log(e.data)
-      emit('comment-submited')
-      emit('close-window')
+      emit('comment-submited');
+      emit('close-comment-form');
     })
   }
 

@@ -19,13 +19,11 @@ const search = ref("")
 const isWatchingCourse = ref(false)
 const currentCourse = ref({ id: null, name: null })
 
-
-const closeCourse = () => isWatchingCourse.value = false;
-
 watch(search, () => {
   seenCourses.value = courses.value.filter(e=> e.name.toLowerCase().includes(search.value.toLocaleLowerCase()))
-}
-)
+});
+
+const closeCourse = () => isWatchingCourse.value = false;
 const updateCourses = (newCourses) => {
   courses.value = newCourses;
   seenCourses.value = newCourses.filter(e=> e.name.toLowerCase().includes(search.value.toLocaleLowerCase()))
