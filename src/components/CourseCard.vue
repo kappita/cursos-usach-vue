@@ -21,11 +21,11 @@
     <div class="card-scores">
       <div title="Dificultad promedio" class="card-score">
         <Icon height="25" icon="ri:puzzle-line" />
-        <p >{{ diff_mean }}</p>
+        <p >{{ diff_mean.toFixed(1) }}</p>
       </div>
       <div title="Demanda de tiempo promedio" class="card-score">
         <Icon height="25" icon="ion:time-outline" />
-        <p>{{ time_mean }}</p>
+        <p>{{ time_mean.toFixed(1) }}</p>
       </div>
     </div>
   </div>
