@@ -5,7 +5,7 @@ import { onMounted, reactive, ref, toRef } from 'vue';
 import CommentSection from './CommentSection.vue';
 import AddCommentForm from './AddCommentForm.vue';
 import ScoreSection from './ScoreSection.vue';
-import AddVoteWindow from './AddVoteWindow.vue';
+import AddVoteForm from './AddVoteForm.vue';
 import { Icon } from "@iconify/vue";
 import Modal from './Modal.vue';
 
@@ -67,6 +67,10 @@ const onCommentFormClose = () => {
   isCommenting.value = false;
 }
 
+const onVoteFormClose = () => {
+  isVoting.value = false;
+}
+
 onMounted(() => {
   getComments();
 })
@@ -75,7 +79,7 @@ onMounted(() => {
 
 <template>
   <div class="course-modal">
-    <AddVoteWindow v-if="isVoting" :course="course" @score-submited="n => updateScoreRef(n)"></AddVoteWindow>
+    <!-- <AddVoteWindow v-if="isVoting" :course="course" @score-submited="n => updateScoreRef(n)"></AddVoteWindow> -->
     <header>
       <p class="title">
         <span>#{{ course.id }}</span>
@@ -96,6 +100,12 @@ onMounted(() => {
       />
     </div>
   </div>
+  <Modal :is-visible="isVoting" @close-modal="onVoteFormClose">
+    <AddVoteForm :course="course" 
+      @close-vote-form="onVoteFormClose"
+      @score-submitted="updateScoreRef"
+    />
+  </Modal>
   <Modal :is-visible="isCommenting" @close-modal="onCommentFormClose">
     <AddCommentForm :course="course" 
       @close-comment-form="onCommentFormClose"
