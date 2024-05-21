@@ -114,7 +114,6 @@ textarea {
 }
 
 .comment-form-btns button {
-  border: 2px solid black;
   border-radius: 18px;
 
   padding: 10px 42px;
@@ -123,19 +122,38 @@ textarea {
 }
 
 .comment-form-btns button:nth-child(1) {
-  color: rgb(62, 152, 255);
-  border: 2px solid rgb(62, 152, 255);
+  color: black;
+  text-decoration: underline;
+  text-underline-offset: 2.5px;
 }
 
 .comment-form-btns button:nth-child(1):hover {
   color: white;
+  border: 2px solid black;
+  background-color: black;
+}
+
+.comment-form-btns button:nth-child(2) {
+  color: white;
   border: 2px solid rgb(62, 152, 255);
-  background-color: rgb(62, 152, 255);
+  background: rgb(62, 152, 255);
 }
 
 .comment-form-btns button:nth-child(2):hover {
   color: white;
-  border: 2px solid black;
-  background-color: black;
+  border: 2px solid rgb(62, 152, 255);
+
+  color: rgb(62, 152, 255);
+  background-color: white;
+
+  transition: 90ms ease;
+}
+
+
+@media (max-width: 565px) {
+  .comment-form-btns {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }
 </style>

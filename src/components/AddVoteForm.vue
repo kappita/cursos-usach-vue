@@ -97,7 +97,8 @@ button {
 
 .vote-form {
   width: 65%;
-  height: 60%;
+  height: 70%;
+  overflow-y: auto;
   padding: 16px 32px;
 
   border-radius: 16px;
@@ -150,12 +151,17 @@ button {
 }
 
 .vote-form-btns button {
-  border: 2px solid black;
   border-radius: 18px;
 
   padding: 10px 42px;
 
   font-weight: 700;
+}
+
+.vote-form-btns button:nth-child(1) {
+  color: black;
+  text-decoration: underline;
+  text-underline-offset: 2.5px;
 }
 
 .vote-form-btns button:nth-child(2) {
@@ -176,5 +182,21 @@ button {
 .vote-form-btns button:nth-child(2):hover {
   color: rgb(62, 152, 255);
   background-color: white;
+}
+
+@media (max-width: 565px) {
+  .vote-form-btns {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .stars-container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .stars-container button {
+    flex: 0 0 33.3%;
+  }
 }
 </style>
