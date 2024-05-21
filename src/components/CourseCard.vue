@@ -3,8 +3,8 @@
   import { Icon } from "@iconify/vue";
 
   const { course } = defineProps(["course"])
-  let diff_mean = `${course.difficulty_mean}/5`;
-  let time_mean = `${course.time_demand_mean}/5`;
+  let diff_mean = `${course.difficulty_mean.toFixed(1)}/5`;
+  let time_mean = `${course.time_demand_mean.toFixed(1)}/5`;
   if (course.vote_count == 0) {
     diff_mean = "Sin votos";
     time_mean = "Sin votos";
@@ -21,11 +21,11 @@
     <div class="card-scores">
       <div title="Dificultad promedio" class="card-score">
         <Icon height="25" icon="ri:puzzle-line" />
-        <p >{{ diff_mean.toFixed(1) }}</p>
+        <p>{{ diff_mean }}</p>
       </div>
       <div title="Demanda de tiempo promedio" class="card-score">
         <Icon height="25" icon="ion:time-outline" />
-        <p>{{ time_mean.toFixed(1) }}</p>
+        <p>{{ time_mean }}</p>
       </div>
     </div>
   </div>
