@@ -65,6 +65,7 @@ const emit = defineEmits(["add-comment"]);
 }
 .comment-section {
   width: 100%;
+  color: black;
 }
 
 .comment-title > * {
@@ -102,6 +103,24 @@ const emit = defineEmits(["add-comment"]);
   gap: 12px;
 }
 
+.no-comments {
+  margin-top: 0.5rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.no-comments p {
+  background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  color: black;
+  
+  padding: 12px 16px;
+  
+  border-radius: 4px;
+}
+
 .not-available-description {
   display: flex;
   align-items: center;
@@ -129,6 +148,7 @@ const emit = defineEmits(["add-comment"]);
 
 .comment-container {
   width: 100%;
+  min-height: calc(50% + 0.5rem);
   max-height: 75%;
 
   display: flex;
@@ -138,10 +158,6 @@ const emit = defineEmits(["add-comment"]);
   overflow-y: auto;
 }
 
-.no-comments {
-  height: 100%;
-  width: 100%;
-}
 
 .comment-paragraph {
   font-size: 15px;

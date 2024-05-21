@@ -47,8 +47,10 @@ select {
 }
 
 .selectors-parent {
+  width: 100%;
+
   display: flex;
-  gap: 8px;
+  gap: 0.8rem;
 }
 
 .selector {

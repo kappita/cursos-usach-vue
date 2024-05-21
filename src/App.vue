@@ -82,9 +82,11 @@ axios("https://osusachdb.ignacioladal.workers.dev/courses/1").then(e=> updateCou
 <style scoped>
 
 .screen {
-  max-width: 65%;
-  margin: 0 auto;
+  width: 100%;
   height: 100vh;
+  
+  margin: 0 auto;
+  padding: 0 5rem;
 }
 
 .logo {
@@ -103,13 +105,12 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 1%;
-  padding-bottom: 1%;
-  height: 10%;
+
+  padding: 1% 0;
   width: 100%;
 }
 
-header h1{
+header h1 {
   font-weight: bold;
   margin-right: 30px;
 }
@@ -133,6 +134,12 @@ header input {
   
 }
 
-
+@media (max-width: 650px) {
+  header {
+    flex-direction: column;
+    justify-content: center;
+    justify-self: center;
+  }
+}
 
 </style>./components/FullCourseWindow.vue

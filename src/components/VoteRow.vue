@@ -1,78 +1,92 @@
 <script setup>
-defineEmits(['rating'])
+import IconStar from "./icons/IconStar.vue";
+import { ref, watch } from "vue";
+
+const emit = defineEmits(['rating']);
+
+const MAX_RATING = 5;
+// f2ec36
+const colorYellow = "#f2ec36";
+const colorWhite = "rgb(255, 255, 255)";
+
+const ratings = ref([
+  ...Array(MAX_RATING)
+  .fill({})
+  .map((_, idx) => ({
+    ratingNumber: idx + 1,
+    seen: false,
+    fill: colorWhite,
+  }))
+]);
+
+const clickedStar = ref(false);
+
+const restartStarFills = () => {
+  if (clickedStar.value) {
+    return;
+  }
+
+  for (let i = 0; i < MAX_RATING; i++) {
+    ratings.value[i].fill = colorWhite;
+  }
+}
+
+const onStarHover = (index) => {
+  if (clickedStar.value) { 
+    return;
+  }
+
+  for (let i = 0; i <= index; i++) {
+    ratings.value[i].fill = colorYellow;
+  }
+}
+
+const onStarClick = (index, ratingNumber) => {
+  if (clickedStar.value) {
+    clickedStar.value = false;
+    restartStarFills();
+
+    emit('rating', 0);
+    return;
+  }
+
+  clickedStar.value = true;
+  onStarHover(index);
+  
+  emit('rating', ratingNumber);
+}
+
+// watch(clickedStar, () => {
+//   console.log(clickedStar.value);
+// });
+
 </script>
 
 
 <template>
-  <div class="stars-container">
-    <div class="star-container" @click="$emit('rating', 1)">
-      <div class="star"></div>
-      <div class="border"></div>
-    </div>
-    <div class="star-container" @click="$emit('rating', 2)">
-      <div class="star"></div>
-      <div class="border"></div>
-    </div>
-    <div class="star-container" @click="$emit('rating', 3)">
-      <div class="star"></div>
-      <div class="border"></div>
-    </div>
-    <div class="star-container" @click="$emit('rating', 4)">
-      <div class="star"></div>
-      <div class="border"></div>
-    </div>
-    <div class="star-container" @click="$emit('rating', 5)">
-      <div class="star"></div>
-      <div class="border"></div>
-    </div>
+  <div class="stars-container" @mouseout="restartStarFills">
+    <button v-for="(rating, index) in ratings" 
+      @click="() => onStarClick(index, rating.ratingNumber)"
+      @mouseover="() => onStarHover(index)">
+      <IconStar :fill="rating.fill" />
+    </button>
   </div>
 </template>
 
 
 <style scoped>
-  .stars-container {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    grid-template-rows: repeat(1, minmax(0, 1fr));
-    width:100%;
-    height: 100%;
-    background-color: white;
-  }
+button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font-size: inherit;
+}
 
-  .star-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    justify-items: center;
-    width: 100%;
-    height: 100%;
-    cursor: pointer
-  }
+.stars-container {
+  display: flex;
+  gap: 16px;
 
-
-  .star {
-    color: yellow;
-    position: absolute;
-    text-align: center;
-    text-justify: center;
-    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-    background: yellow;
-    height: 80%;
-    aspect-ratio: 1;
-    z-index: 20;
-  }
-
-  .border {
-    color: black;
-    font-size: 5rem;
-    position: absolute;
-    text-align: center;
-    text-justify: center;
-    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-    background: black;
-    height: 100%;
-    aspect-ratio: 1;
-  }
+  background-color: white;
+}
 
 </style>
